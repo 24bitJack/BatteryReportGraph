@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+#include <string>
+#include <fstream>
+#include <cstdlib>
+int main() {
+    int returncode = system("powercfg /batteryreport");
+    int intar1[256];
+    int intar2[256];
+    if (returncode == 0) {
+        cout << "Extraction of Battery Data was successful" << endl;
+    } else {
+        cout <<"Extraction of Battery Data failed or returned non-zero status:"<< returncode << endl;
+    }
+    fstream inFile("file:///C:/Users/thecr/battery-report.html");
+    char fileChar;
+    while (!inFile) {
+        return 1;
+    }
+      //html/body/table[6]
+      //*<div class="explanation">
+      //
+      //Charge capacity history of the system's batteries
+      //
+      //</div>
+      const char batText[29] =  "*<div class=\"explanation\">";
+      int x = 0;
+      inFile.get(fileChar);
+      bool c = false;
+    while(inFile) {
+        if (fileChar = batText[x]) {
+            if (x == 29||c == true) {
+                c = true;
+                
+            } else {
+                x++;
+            }
+            
+        }
+    }
+
+}
+void graph(string &str1, int a) {
+
+}
